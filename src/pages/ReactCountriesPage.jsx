@@ -13,6 +13,14 @@ export default function ReactCountriesPage() {
     setCountryFilter(newCountryFilter)
   }
 
+  const countryFilterLowerCase = countryFilter.toLocaleLowerCase()
+
+  const filteredCountries = countryFilterLowerCase.length >= 3 
+    ? allCountries.filter(({ nameLowerCase }) => {
+        return nameLowerCase.includes(countryFilterLowerCase)
+      }) 
+    : allCountries
+
   return (
     <div>
       <Header>React Countries</Header>
