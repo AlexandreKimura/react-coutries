@@ -1,6 +1,6 @@
 import Country from "./Country";
 
-export default function Countries({ children: countries = [] }) {
+export default function Countries({ children: countries = [], onCountryClick = null }) {
   return (
     <div className="border p-2">
       <h2 className="text-center font-semibold">
@@ -10,7 +10,7 @@ export default function Countries({ children: countries = [] }) {
       {
         countries.map(country => {
           return (
-            <Country key={country.id}>{country}</Country>
+            <Country onCountryClick={onCountryClick} key={country.id}>{country}</Country>
           )
         })
       }

@@ -9,9 +9,22 @@ import { allCountries } from "../data/countries"
 export default function ReactCountriesPage() {
 
   const [countryFilter, setCountryFilter] = useState('Argentina')
+  const [visitedCountries, setVisitedCountries] = useState([])
 
   function handleCountryFilterChange(newCountryFilter) {
     setCountryFilter(newCountryFilter)
+  }
+
+  function toggleVisitedCountry(countryId) {
+    let newVisitedCountries = [...visitedCountries];
+
+    if(newVisitedCountries.indexOf(countryId) !== -1) {
+      newVisitedCountries = newVisitedCountries.filter(visitedCountryId => visitedCountryId !== countryId)
+    }else {
+      newVisitedCountries.push(countryId)
+    }
+
+    setVisitedCountries(newVisitedCountries)
   }
 
   const countryFilterLowerCase = countryFilter.trim().toLocaleLowerCase()
@@ -34,7 +47,7 @@ export default function ReactCountriesPage() {
           autoFocus
         />
 
-      <Countries>{filteredCountries}</Countries>
+      <Countries onCountryClick={toggleVisitedCountry}>{filteredCountries}</Countries>
 
       </Main>
     </div>
